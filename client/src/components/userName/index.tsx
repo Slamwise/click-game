@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
+import { socket } from "../../services/socketService";
 
 // interface UNameProps {}
 
-export function UserName(props) {
+export function UserName() {
     const [userName, setUserName] = useState("");
     const [userNameSubmitted, setUserNameSubmitted] = useState(false);
 
     const updateFlag = (e) => {
         setUserNameSubmitted(true);
         e.preventDefault();
+        socket.auth = { userName };
+        socket.connect();
+        socket.emit('connection');
     };
     
     const updateUserName = (e: { target: { value: React.SetStateAction<string>; }; }) => {
@@ -27,6 +31,6 @@ export function UserName(props) {
         </div>
             )
     } else {
-        return <p>{userName}</p>
+        return <p>Username selected: {userName}</p>
         };
     }

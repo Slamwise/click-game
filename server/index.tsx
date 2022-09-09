@@ -21,17 +21,25 @@ io.use((socket, next) => {
     next();
   });
 
-  io.on("connection", (socket) => {
-    const users = [];
+io.on("connection", (socket) => {
+    var users = [];
     for (let [id, socket] of io.of("/").sockets) {
-      users.push({
+        users.push({
         userID: id,
         username: socket.username,
-      });
+        });
     }
     socket.emit("users", users);
     // ...
-  });
+    });
+
+io.on("connection", (socket) => {
+    // notify existing users
+    socket.broadcast.emit("user connected", {
+        userID: socket.id,
+        username: socket.username,
+    });
+    });
 
 // io.on("connection", (socket) => {
 //   console.log(`User Connected: ${socket.id}`);

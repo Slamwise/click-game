@@ -2,29 +2,35 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { io } from 'socket.io-client';
 import { UserName } from "./components/userName";
+import { Users } from "./components/users";
+import { socket } from "./services/socketService"
+import styled from "styled-components";
+
+const UsersPanel = styled.div`
+  width: 10%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: 1em;
+  `;
 
 function App() {
-
-  const socket = io("http://localhost:3001", { autoConnect: false });
 
   socket.onAny((event, ...args) => {
     console.log(event, args);
   });
 
-  const [userName, setUserName] = useState("");
-  const [userNameSubmitted, setUserNameSubmitted] = useState(false);
-
-  // const updateFlag = (e) => {
-  //   setUserNameSubmitted(true);
-  //   e.preventDefault();
-  //   socket.auth = { userName };
-  //   socket.connect();
-  // };
-  
-
 
   return (
-    <UserName />
+    <div>
+      <div>
+        <UserName />
+      </div>
+      <UsersPanel>
+        <Users />
+      </UsersPanel>
+    </div>
         )
   }
 export default App;
