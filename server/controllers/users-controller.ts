@@ -1,10 +1,9 @@
 const knex = require('./../db');
 
 // Get all users
-
 exports.usersAll = async (req, res) => {
     knex
-        .select('userName')
+        .select()
         .from('users')
         .then(userNames =>{
             res.json(userNames)
@@ -14,3 +13,4 @@ exports.usersAll = async (req, res) => {
         })
 }
 
+// 

@@ -4,6 +4,9 @@ const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 
+
+const usersRouter = require('./routes/routes');
+
 app.use(cors());
 
 const server = http.createServer(app);
@@ -53,6 +56,10 @@ io.on("connection", (socket) => {
 //   });
 // });
 
+app.use('/users', usersRouter);
+
 server.listen(3001, () => {
   console.log("SERVER IS RUNNING");
 });
+
+export{}

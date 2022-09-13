@@ -3,6 +3,8 @@ import { socket } from "../../services/socketService";
 
 export function Users() {
 
+  var users : String[] = [];
+
   useEffect(() => {
   
   socket.on("users", (users) => {
