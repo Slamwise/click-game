@@ -8,7 +8,7 @@ const dbPath = path.resolve(__dirname, 'db/database.sqlite')
 
 // Create connection to SQLite database
 const knex = require('knex')({
-  client: 'sqlite3',
+  client: 'sqlite',
   connection: {
     filename: dbPath,
   },
@@ -20,7 +20,7 @@ knex.schema
   // Make sure no "users" table exists
   // before trying to create new
   .hasTable('users')
-    .then((exists: boolean) => {
+    .then((exists) => {
       if (!exists) {
         return knex.schema.createTable('users', (table)  => {
           table.increments('id').primary()
@@ -54,5 +54,3 @@ knex.select('*').from('users')
 
 // Export the database
 module.exports = knex
-
-export{}

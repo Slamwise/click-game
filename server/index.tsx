@@ -5,7 +5,7 @@ const { Server } = require("socket.io");
 const cors = require("cors");
 
 
-const usersRouter = require('./routes/routes');
+const usersRouter = require('./routes/routes.ts');
 
 app.use(cors());
 
@@ -61,5 +61,3 @@ app.use('/users', usersRouter);
 server.listen(3001, () => {
   console.log("SERVER IS RUNNING");
 });
-
-export{}

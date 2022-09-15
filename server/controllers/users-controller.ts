@@ -1,8 +1,8 @@
-const knex = require('./../db');
+const knext = require('./../db.ts');
 
 // Get all users
 exports.usersAll = async (req, res) => {
-    knex
+    knext
         .select()
         .from('users')
         .then(userNames =>{

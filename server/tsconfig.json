@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "checkJs": true
+    "checkJs": true,
+    "esModuleInterop": true,
+    "moduleDetection": "force"
   },
   "lib": ["es2015"]
 }
