@@ -1,6 +1,3 @@
-// bookshelf-app/server/db.js
-
-// Import path module
 const path = require('path')
 
 // Get the location of database.sqlite file
@@ -8,7 +5,7 @@ const dbPath = path.resolve(__dirname, 'db/database.sqlite')
 
 // Create connection to SQLite database
 const knex = require('knex')({
-  client: 'sqlite',
+  client: 'sqlite3',
   connection: {
     filename: dbPath,
   },
@@ -47,7 +44,7 @@ knex.schema
     })
 
 // Just for debugging purposes:
-// Log all data in "books" table
+// Log all data in "users" table
 knex.select('*').from('users')
   .then(data => console.log('data:', data))
   .catch(err => console.log(err))

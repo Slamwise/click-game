@@ -9,7 +9,7 @@ const router = express.Router()
 
 // Add route for GET request to retrieve all book
 // In server.js, books route is specified as '/books'
-// this means that '/all' translates to '/books/all'
+// this means that '/all' translates to '/users/all'
 router.get('/all', userRoutes.usersAll)
 
 // Export router

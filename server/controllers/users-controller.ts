@@ -1,8 +1,8 @@
-const knext = require('./../db.ts');
+const knex = require('./../db.ts');
 
 // Get all users
 exports.usersAll = async (req, res) => {
-    knext
+    knex
         .select()
         .from('users')
         .then(userNames =>{
@@ -13,4 +13,8 @@ exports.usersAll = async (req, res) => {
         })
 }
 
+// Create a new user
+exports.newUser = async (req, res) => {
+    knex('users').insert({})
+}
 // 

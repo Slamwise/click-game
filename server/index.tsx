@@ -4,9 +4,6 @@ const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 
-
-const usersRouter = require('./routes/routes.ts');
-
 app.use(cors());
 
 const server = http.createServer(app);
@@ -24,6 +21,7 @@ io.use((socket, next) => {
     next();
   });
 
+// Use this to fetch user databse to display on front end.
 io.on("connection", (socket) => {
     var users = [];
     for (let [id, socket] of io.of("/").sockets) {
@@ -55,6 +53,8 @@ io.on("connection", (socket) => {
 //     socket.to(data.room).emit("receive_message", data);
 //   });
 // });
+
+const usersRouter = require('./routes/routes.ts');
 
 app.use('/users', usersRouter);
 
