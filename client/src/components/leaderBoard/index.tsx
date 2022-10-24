@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { LeaderBoardList } from '../leaderBoardList'
 
@@ -17,23 +17,22 @@ export const Leaderboard = () => {
     const [users, setUsers] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
     
-    const fetchUsers = useCallback(() => {
-        const usersPromise = new Promise(resolve => {
-            setUsers(fakeUsers)
-            setLoading(false)
-            setTimeout(() => (
-                resolve
-            ), 3000)
-            })
-        usersPromise
-            .then(() => console.log('Users loaded succesfully'))
-            .catch(() => console.log('Error loading users'))
-    }, [])
-    
     // Fetch all users on render
     useEffect(() => {
+        const fetchUsers = () => {
+            const usersPromise = new Promise(resolve => {
+                setUsers(fakeUsers)
+                setLoading(false)
+                setTimeout(() => (
+                    resolve
+                ), 3000)
+                })
+            usersPromise
+                .then(() => console.log('Users loaded succesfully'))
+                .catch(() => console.log('Error loading users'))
+        }
         fetchUsers()
-    }, [fetchUsers])
+    }, [])
 
     return (
 
