@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
-import { socket } from "../../services/socketService";
+import React, { useState, useEffect } from 'react'
+import { socket } from "../../services/socketService"
 
-// interface UNameProps {}
+import "../../styles/username.css"
 
 export function UserName() {
-    const [userName, setUserName] = useState("");
-    const [userNameSubmitted, setUserNameSubmitted] = useState(false);
+    const [userName, setUserName] = useState("")
+    const [userNameSubmitted, setUserNameSubmitted] = useState(false)
 
     const updateFlag = (e) => {
-        setUserNameSubmitted(true);
-        e.preventDefault();
-        socket.auth = { userName };
-        socket.connect();
-        socket.emit('connection');
-    };
+        setUserNameSubmitted(true)
+        e.preventDefault()
+        socket.auth = { userName }
+        socket.connect()
+        socket.emit('connection')
+    }
     
-    const updateUserName = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    const updateUserName = (e: { target: { value: React.SetStateAction<string> } }) => {
         setUserName(e.target.value)
     }
 
     if (!userNameSubmitted || !userName){
         return (
-        <div className="App">
+        <div className="username-selector">
             <form onSubmit={updateFlag}>
                 <label>
                 Select Username:</label>
@@ -31,6 +31,10 @@ export function UserName() {
         </div>
             )
     } else {
-        return <p>Username selected: {userName}</p>
-        };
+        return (
+        <div className="username-display">
+            <p>Username selected: {userName}</p>
+        </div>
+        )
+    }
     }

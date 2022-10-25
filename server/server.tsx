@@ -36,6 +36,8 @@ io.on("connection", (socket) => {
 
 io.on("connection", (socket) => {
     // notify existing users
+    var _user = socket.handshake.auth.userName
+    console.log("user connected: " + _user)
     socket.broadcast.emit("user connected", {
         userID: socket.id,
         username: socket.username,

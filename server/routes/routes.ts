@@ -1,14 +1,14 @@
 // Import express
 const express = require('express')
 
-// Import books-controller
+// Import users-controller
 const userRoutes = require('./../controllers/users-controller.ts')
 
 // Create router
 const router = express.Router()
 
-// Add route for GET request to retrieve all book
-// In server.js, books route is specified as '/books'
+// Add route for GET request to retrieve all user
+// In server.js, users route is specified as '/users'
 // this means that '/all' translates to '/users/all'
 router.get('/all', userRoutes.usersAll)
 
