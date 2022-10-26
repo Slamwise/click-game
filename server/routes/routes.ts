@@ -8,9 +8,14 @@ const userRoutes = require('./../controllers/users-controller.ts')
 const router = express.Router()
 
 // Add route for GET request to retrieve all user
-// In server.js, users route is specified as '/users'
+// In server.tsx, users route is specified as '/users'
 // this means that '/all' translates to '/users/all'
+
+// '/users/all'
 router.get('/all', userRoutes.usersAll)
+
+// '/users/new'
+router.post('/new', userRoutes.newUser)
 
 // Export router
 module.exports = router

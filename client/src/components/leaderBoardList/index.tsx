@@ -9,7 +9,6 @@ interface UserUI {
     username: string;
     wins: number;
     losses: number;
-    joindate: string;
 }
 
 interface LeaderboardListUI {
@@ -28,8 +27,6 @@ export const LeaderBoardList = (props: LeaderboardListUI) => {
             <th className="table-head-item" />
 
             <th className="table-head-item">User</th>
-
-            <th className="table-head-item">Joindate</th>
 
             <th className="table-head-item">Wins</th>
 

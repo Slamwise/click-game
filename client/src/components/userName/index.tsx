@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { socket } from "../../services/socketService"
 
 import "../../styles/username.css"
@@ -14,7 +14,7 @@ export function UserName() {
         socket.connect()
         socket.emit('connection')
     }
-    
+
     const updateUserName = (e: { target: { value: React.SetStateAction<string> } }) => {
         setUserName(e.target.value)
     }

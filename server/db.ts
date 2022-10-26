@@ -22,9 +22,8 @@ knex.schema
         return knex.schema.createTable('users', (table)  => {
           table.increments('id').primary()
           table.string('userName')
-          table.timestamps('joinDate')
           table.integer('wins')
-          table.integer('losses')
+          table.integer('Losses')
         })
         .then(() => {
           // Log success message

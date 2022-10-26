@@ -4,14 +4,13 @@ import { LeaderBoardList } from '../leaderBoardList'
 
 import '../../styles/leaderboard.css'
 
-var fakeUsers: any[] = [   {id: 0, username: 'sam', wins: 4, losses: 0, joindate: '28Sep22'}, 
-                    {id:1, username: 'kevin', wins: 0, losses: 4, joindate: '28Sep22'}  ]
+var fakeUsers: any[] = [   {id: 0, username: 'sam', wins: 4, losses: 0}, 
+                    {id:1, username: 'kevin', wins: 0, losses: 4}  ]
 
 export const Leaderboard = () => {
 
     // Initiate stateful variables
     const [userName, setUserName] = useState('')
-    const [joinDate, setJoinDate] = useState('')
     const [wins, setWins] = useState('')
     const [losses, setLosses] = useState('')
     const [users, setUsers] = useState<any[]>([])

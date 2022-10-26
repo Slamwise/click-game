@@ -15,6 +15,10 @@ exports.usersAll = async (req, res) => {
 
 // Create a new user
 exports.newUser = async (req, res) => {
-    knex('users').insert({})
+    knex('users').insert({
+        userName: req.body.username,
+        Wins: 0,
+        Losses: 0
+    })
 }
 // 

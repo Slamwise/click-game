@@ -8,7 +8,6 @@ interface leaderBoardItemUI {
       username: string;
       wins: number;
       losses: number;
-      joindate: string;
     }
   }
 
@@ -22,10 +21,6 @@ export const LeaderBoardItem = (props: leaderBoardItemUI) => (
 
         <td className="table-item">
         {props.user.username}
-        </td>
-
-        <td className="table-item">
-        {props.user.joindate}
         </td>
 
         <td className="table-item">
