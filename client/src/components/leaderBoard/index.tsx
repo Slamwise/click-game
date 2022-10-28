@@ -4,9 +4,15 @@ import { LeaderBoardList } from '../leaderBoardList'
 
 import '../../styles/leaderboard.css'
 
+// Delete or comment fakeUsers when getUsers() API call implemented
 var fakeUsers: any[] = [   {id: 0, username: 'sam', wins: 4, losses: 0}, 
                     {id:1, username: 'kevin', wins: 0, losses: 4}  ]
 
+interface User {
+    userName: string
+    token: number
+}
+                    
 export const Leaderboard = () => {
 
     // Initiate stateful variables
@@ -19,7 +25,11 @@ export const Leaderboard = () => {
     // Fetch all users on render
     useEffect(() => {
         const fetchUsers = () => {
-            const usersPromise = new Promise(resolve => {
+            const usersPromise = new Promise<[User[]]>(resolve => {
+                // Change "fakeUsers" to "users" on next line\
+                // Delete setTimeout()
+                // Add API call to read database for games
+                let Users = fetch('/users/getUsers')
                 setUsers(fakeUsers)
                 setLoading(false)
                 setTimeout(() => (

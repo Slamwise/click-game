@@ -12,7 +12,7 @@ const router = express.Router()
 // this means that '/all' translates to '/users/all'
 
 // '/users/all'
-router.get('/all', userRoutes.usersAll)
+router.get('/all', userRoutes.getUsers)
 
 // '/users/new'
 router.post('/new', userRoutes.newUser)

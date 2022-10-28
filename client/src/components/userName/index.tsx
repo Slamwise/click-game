@@ -7,12 +7,13 @@ export function UserName() {
     const [userName, setUserName] = useState("")
     const [userNameSubmitted, setUserNameSubmitted] = useState(false)
 
-    const updateFlag = (e) => {
+    async function updateFlag(e) {
         setUserNameSubmitted(true)
         e.preventDefault()
         socket.auth = { userName }
         socket.connect()
         socket.emit('connection')
+        await fetch('/users/newUser?username='+userName)
     }
 
     const updateUserName = (e: { target: { value: React.SetStateAction<string> } }) => {

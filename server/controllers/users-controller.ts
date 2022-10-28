@@ -1,12 +1,10 @@
 const knex = require('./../db.ts');
 
 // Get all users
-exports.usersAll = async (req, res) => {
-    knex
-        .select()
-        .from('users')
-        .then(userNames =>{
-            res.json(userNames)
+exports.getUsers = async (req, res) => {
+    knex.select().from('users')
+        .then((data) =>{
+            res.json(data)
         })
         .catch(err => {
             res.json({ message: `There was an error retrieving users: ${err}` })
@@ -19,6 +17,12 @@ exports.newUser = async (req, res) => {
         userName: req.body.username,
         Wins: 0,
         Losses: 0
+    })
+    .then(() => {
+        console.log(`succesfully added ${req.body.username} to database`)
+    })
+    .catch(err => {
+        res.json({ message: `There was an error adding user: ${err}` })
     })
 }
 // 

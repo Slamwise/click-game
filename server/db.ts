@@ -20,7 +20,7 @@ knex.schema
     .then((exists) => {
       if (!exists) {
         return knex.schema.createTable('users', (table)  => {
-          table.increments('id').primary()
+          table.increments('token').primary()
           table.string('userName')
           table.integer('wins')
           table.integer('Losses')
