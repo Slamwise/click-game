@@ -44,6 +44,14 @@ io.on("connection", (socket) => {
     });
     });
 
+io.on('user-added', () => {
+    console.log('user added succesfully')
+})
+
+io.on('user-added-error', () => {
+    console.log('there was an error adding user')
+})
+
 // io.on("connection", (socket) => {
 //   console.log(`User Connected: ${socket.id}`);
 

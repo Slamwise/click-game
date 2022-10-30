@@ -14,12 +14,12 @@ exports.getUsers = async (req, res) => {
 // Create a new user
 exports.newUser = async (req, res) => {
     knex('users').insert({
-        userName: req.body.username,
+        userName: req.query.username,
         Wins: 0,
         Losses: 0
     })
     .then(() => {
-        console.log(`succesfully added ${req.body.username} to database`)
+        console.log(`succesfully added ${req.query.username} to database`)
     })
     .catch(err => {
         res.json({ message: `There was an error adding user: ${err}` })

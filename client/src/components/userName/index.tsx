@@ -13,7 +13,15 @@ export function UserName() {
         socket.auth = { userName }
         socket.connect()
         socket.emit('connection')
-        await fetch('/users/newUser?username='+userName)
+        await fetch(`http://localhost:3001/users/new?username=${userName}`, {
+            method: 'POST'
+        })
+        .then(() => {
+            socket.emit('user-added')
+         })
+        .catch(() => {
+            socket.emit('user-added-error')
+        })
     }
 
     const updateUserName = (e: { target: { value: React.SetStateAction<string> } }) => {

@@ -29,7 +29,7 @@ export const Leaderboard = () => {
                 // Change "fakeUsers" to "users" on next line\
                 // Delete setTimeout()
                 // Add API call to read database for games
-                let Users = fetch('/users/getUsers')
+                let Users = fetch('http://localhost:3000/users/getUsers')
                 setUsers(fakeUsers)
                 setLoading(false)
                 setTimeout(() => (
