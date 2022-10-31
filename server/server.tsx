@@ -22,34 +22,20 @@ io.use((socket, next) => {
   })
 
 io.on("connection", (socket) => {
-// notify existing users
-var _user = socket.handshake.auth.userName
-console.log("user connected: " + _user)
-// socket.broadcast.emit("user connected", {
-//     userID: socket.id,
-//     username: socket.username,
-// })
-})
 
-// Use this to fetch user databse to display on front end.
-io.on("connection", (socket) => {
+    var _user = socket.handshake.auth.userName
+    console.log("user connected: " + _user)
+
     var users = []
     for (let [id, socket] of io.of("/").sockets) {
         users.push({
         userID: id,
-        username: socket.handshake.auth.username
+        username: socket.handshake.auth.userName
         })
     }
     console.log(users)
+    console.log(socket.handshake.headers)
     })
-
-io.on('userAdded', () => {
-    console.log('user added succesfully')
-})
-
-io.on('userAddedEerror', () => {
-    console.log('there was an error adding user')
-})
 
 // io.on("connection", (socket) => {
 //   console.log(`User Connected: ${socket.id}`)

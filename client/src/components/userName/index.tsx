@@ -12,7 +12,6 @@ export function UserName() {
         e.preventDefault()
         socket.auth = { userName }
         socket.connect()
-        socket.emit(`connection`)
         await fetch(`http://localhost:3001/users/new?username=${userName}`, {
             method: `POST`
         })
