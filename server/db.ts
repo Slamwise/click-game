@@ -34,10 +34,10 @@ knex.schema
         })
       }
     })
-    .then(() => {
-      // Log success message
-      console.log('db created')
-    })
+    // .then(() => {
+    //   // Log success message
+    //   console.log('db created')
+    // })
     .catch((error) => {
       console.error(`There was an error setting up the database: ${error}`)
     })

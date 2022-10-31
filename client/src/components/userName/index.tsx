@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
 import { socket } from "../../services/socketService"
 
 import "../../styles/username.css"
@@ -12,15 +12,9 @@ export function UserName() {
         e.preventDefault()
         socket.auth = { userName }
         socket.connect()
-        socket.emit('connection')
+        socket.emit(`connection`)
         await fetch(`http://localhost:3001/users/new?username=${userName}`, {
-            method: 'POST'
-        })
-        .then(() => {
-            socket.emit('user-added')
-         })
-        .catch(() => {
-            socket.emit('user-added-error')
+            method: `POST`
         })
     }
 
