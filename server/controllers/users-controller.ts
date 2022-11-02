@@ -1,4 +1,5 @@
-const knex = require('./../db.ts')
+const knex = require("./../db.ts")
+const cookie = require("cookie")
 
 // Get all users
 exports.getUsers = async (req, res) => {

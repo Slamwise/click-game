@@ -3,9 +3,23 @@ const app = express()
 const http = require("http")
 const { Server } = require("socket.io")
 const cors = require("cors")
-const cookie = require("cookie")
+const cookieLib = require("cookie")
+const cookieParser = require("cookie-parser")
 
 app.use(cors())
+app.use(cookieParser())
+app.use(function (req,res,next) {
+    console.log('cookies: ' + req.cookies)
+    var cookie = req.cookies.cookieName
+    if (cookie === undefined) {
+      //cookie not defined, set a new cookie
+      var hash = Math.random().toString();
+      hash = hash.substring(2,hash.length);
+      res.cookie('cookieName', hash, { maxAge: 900000, httpOnly: false });
+      console.log('cookie created successfully');
+    }
+  next();
+  })
 
 const server = http.createServer(app)
 
@@ -22,17 +36,17 @@ io.on("connection", (socket) => {
 
     var _user = socket.handshake.auth.userName
     console.log("user connected: " + _user)
-
+    // socket.handshake.headers.cookie = cookieLib.serialize('name', socket.id)
     var users = []
     for (let [id, socket] of io.of("/").sockets) {
         users.push({
         userID: id,
-        username: socket.handshake.auth.userName
+        username: socket.handshake.auth.userName,
+        cookie: socket.handshake.headers.cookie
         })
     }
+    
     console.log(users)
-    console.log(socket.handshake)
-    console.log(socket.handshake.headers.cookie)
     })
 
 // io.on("connection", (socket) => {
