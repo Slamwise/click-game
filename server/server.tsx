@@ -3,6 +3,7 @@ const app = express()
 const http = require("http")
 const { Server } = require("socket.io")
 const cors = require("cors")
+const cookie = require("cookie")
 
 app.use(cors())
 
@@ -12,16 +13,12 @@ const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
     methods: ["GET", "POST"],
-  },
-})
-
-io.use((socket, next) => {
-    const username = socket.handshake.auth.username
-    socket.username = username
-    next()
-  })
+    }
+    })
 
 io.on("connection", (socket) => {
+
+    // var cookies = cookie.parse(socket.handshake.headers.cookie);      
 
     var _user = socket.handshake.auth.userName
     console.log("user connected: " + _user)
@@ -34,7 +31,8 @@ io.on("connection", (socket) => {
         })
     }
     console.log(users)
-    console.log(socket.handshake.headers)
+    console.log(socket.handshake)
+    console.log(socket.handshake.headers.cookie)
     })
 
 // io.on("connection", (socket) => {
