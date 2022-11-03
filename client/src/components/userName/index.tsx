@@ -15,6 +15,7 @@ export function UserName() {
         const cookies = cookie.serialize("cookies", "1234")
         await fetch(`http://localhost:3001/users/new?username=${userName}`, {
             method: `POST`,
+            credentials: `include`
         })
     }
 

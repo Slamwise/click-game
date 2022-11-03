@@ -1,5 +1,5 @@
 const knex = require("./../db.ts")
-const cookie = require("cookie")
+const cookieLib = require("cookie")
 
 // Get all users
 exports.getUsers = async (req, res) => {
@@ -20,7 +20,7 @@ exports.newUser = async (req, res) => {
         Losses: 0
     })
     .then(() => {
-        console.log(`succesfully added ${req.query.username} to database`)
+        // console.log(`succesfully added ${req.query.username} to database`)
     })
     .catch(err => {
         res.json({ message: `There was an error adding user: ${err}` })
