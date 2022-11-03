@@ -8,8 +8,7 @@ const cookieParser = require("cookie-parser")
 
 app.use(cors())
 app.use(cookieParser())
-app.use(function (req,res,next) {
-    console.log('cookies: ' + req.cookies)
+app.use((req,res,next) => {
     var cookie = req.cookies.cookieName
     if (cookie === undefined) {
       //cookie not defined, set a new cookie
