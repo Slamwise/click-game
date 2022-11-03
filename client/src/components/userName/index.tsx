@@ -1,10 +1,20 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { socket } from "../../services/socketService"
 import "../../styles/username.css"
 
 export function UserName() {
     const [userName, setUserName] = useState("")
     const [userNameSubmitted, setUserNameSubmitted] = useState(false)
+
+    useEffect(() => {
+        let cookie = document.cookie
+        fetch(`http://localhost:3001/users/matchCookies?value=${cookie.substring(11)}`, {
+            method: `GET`,
+            credentials: `include`
+        })
+    }, [])
+
+
 
     async function updateFlag(e) {
         setUserNameSubmitted(true)

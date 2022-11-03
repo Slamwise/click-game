@@ -12,20 +12,31 @@ exports.getUsers = async (req, res) => {
         })
 }
 
+// Find a single user
+exports.matchCookies = async (req, res) => {
+    const val = req.query.value
+    console.log('test: ' + val)
+    knex.select('cookie').from('users')
+    .then((data) => {
+        res.json(data)
+    })
+}
+
 // Create a new user
 exports.newUser = async (req, res) => {
+    const cookie = req.cookies.session_id
     knex('users').insert({
         userName: req.query.username,
         Wins: 0,
-        Losses: 0
+        Losses: 0,
+        cookie: cookie
     })
     .then(() => {
-        // console.log(`succesfully added ${req.query.username} to database`)
-        res.status(200).send({'msg': 'success'})
+        console.log(`succesfully added ${req.query.username} to database`)
+        res.status(200).json({message: `succesfully added ${req.query.username} to database`})
     })
     .catch(err => {
-        res.status(403)
-        res.json({ message: `There was an error adding user: ${err}` })
+        res.status(403).json({ message: `There was an error adding user: ${err}` })
     })
 }
 // 

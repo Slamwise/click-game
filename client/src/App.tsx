@@ -10,6 +10,13 @@ function App() {
     console.log(event, args);
   });
 
+  useEffect(() => {
+    fetch(`http://localhost:3001/setCookies`, {
+      method: `GET`,
+      credentials: 'include'
+  })
+  }, [])
+
   return (
     <div>
       <UserName></UserName>
