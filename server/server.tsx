@@ -19,6 +19,8 @@ const io = new Server(server, {
     }
     })
 
+
+
 io.on("connection", (socket) => {
     // var cookies = cookie.parse(socket.handshake.headers.cookie);      
     var _user = socket.handshake.auth.userName

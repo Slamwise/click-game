@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { socket } from "../../services/socketService"
-import cookie from "cookie"
 import "../../styles/username.css"
 
 export function UserName() {
@@ -12,7 +11,6 @@ export function UserName() {
         e.preventDefault()
         socket.auth = { userName }
         socket.connect()
-        const cookies = cookie.serialize("cookies", "1234")
         await fetch(`http://localhost:3001/users/new?username=${userName}`, {
             method: `POST`,
             credentials: `include`
