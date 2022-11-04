@@ -16,7 +16,9 @@ export function UserName() {
         .then(data => {
             if (data.userName != undefined) {
                 setUserName(data.userName)
-                setUserNameSubmitted(true)}
+                setUserNameSubmitted(true)
+                socket.auth = data.userName
+                socket.connect()}
         })
     }, [])
 
