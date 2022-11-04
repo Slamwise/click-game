@@ -13,8 +13,11 @@ export function UserName() {
             //credentials: `include`
         })
         .then(res => res.json())
-        .then(data => setUserName(data.userName))
-        .then(() => setUserNameSubmitted(true))
+        .then(data => {
+            if (data.userName != undefined) {
+                setUserName(data.userName)
+                setUserNameSubmitted(true)}
+        })
     }, [])
 
     async function updateFlag(e) {
