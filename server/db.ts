@@ -46,7 +46,7 @@ knex.schema
 // Just for debugging purposes:
 // Log all data in "users" table
 knex.select('*').from('users')
-  // .then(data => console.log('data:', data))
+  .then(data => console.log('data:', data))
   .catch(err => console.log(err))
 
 // Export the database

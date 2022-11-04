@@ -12,13 +12,19 @@ exports.getUsers = async (req, res) => {
         })
 }
 
-// Find a single user
+// Match browser cookies to existing user in database
 exports.matchCookies = async (req, res) => {
-    const val = req.query.value
-    console.log('test: ' + val)
-    knex.select('cookie').from('users')
+    let val = req.query.value
+    knex.select('userName', 'token', 'cookie').from('users')
     .then((data) => {
-        res.json(data)
+        let findUser = data.find(x => x.cookie === val)
+        if (findUser != undefined) {
+            console.log(findUser)
+            res.status(200).json({userName: findUser.userName, token: findUser.token})
+        }
+        else {
+            res.status(403).json({message: `Cookie not attached to an existing user.`})
+        }
     })
 }
 

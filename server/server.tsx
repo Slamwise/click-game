@@ -18,14 +18,14 @@ const createCookie = (req,res,next) => {
       //cookie not defined, set a new cookie
       var hash = Math.random().toString();
       hash = hash.substring(2,hash.length);
-      res.cookie('session_id', hash, { maxAge: 900000, httpOnly: false, secure: false, sameSite: 'none'});
-      console.log('cookie created successfully');
+      res.cookie('session_id', hash, { maxAge: 9000000000, httpOnly: false, secure: false, sameSite: 'none'});
+      //console.log('cookie created successfully');
   }
   next();
 }
 const validateCookie = (req,res,next) => {
   const { cookies } = req
-  console.log(cookies)
+  //console.log(cookies)
   if ('session_id' in cookies) {
       //console.log(`Session id exists`)
       if (cookies.session_id === 'session_id') {

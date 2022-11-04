@@ -10,11 +10,12 @@ export function UserName() {
         let cookie = document.cookie
         fetch(`http://localhost:3001/users/matchCookies?value=${cookie.substring(11)}`, {
             method: `GET`,
-            credentials: `include`
+            //credentials: `include`
         })
+        .then(res => res.json())
+        .then(data => setUserName(data.userName))
+        .then(() => setUserNameSubmitted(true))
     }, [])
-
-
 
     async function updateFlag(e) {
         setUserNameSubmitted(true)
