@@ -64,6 +64,10 @@ io.on("connection", (socket) => {
         //cookie: socket.handshake.headers.cookie
         })
     }
+    socket.on('refresh', () => {
+        console.log(io.sockets.clients())
+        console.log('success')
+    })
     })
 
 const usersRouter = require('./routes/routes.ts')

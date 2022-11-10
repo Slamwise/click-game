@@ -18,7 +18,9 @@ export function UserName() {
                 setUserName(data.userName)
                 setUserNameSubmitted(true)
                 socket.auth = data.userName
-                socket.connect()}
+                socket.connect()
+                socket.emit('refresh')}
+                
         })
     }, [])
 
