@@ -67,8 +67,8 @@ io.on("connection", async (socket) => {
     console.log('clients: '+io.engine.clientsCount)
 
     socket.on('disconnect', () => {
-        socket.disconnect()
-        console.log(socket.handshake.auth.userName + ' disconnected')
+        socket.connect
+        console.log(socket.handshake.auth.userName + 'reconnected')
     })
     socket.on('refresh', () => {
         console.log(io.sockets.clients())
