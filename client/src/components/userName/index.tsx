@@ -15,6 +15,7 @@ export function UserName() {
         .then(res => res.json())
         .then(data => {
             if (data.userName != undefined) {
+                console.log('test')
                 setUserName(data.userName)
                 setUserNameSubmitted(true)
                 socket.auth = data.userName

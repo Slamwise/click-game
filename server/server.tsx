@@ -51,7 +51,7 @@ const io = new Server(server, {
     }
     })
 
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
     // var cookies = cookie.parse(socket.handshake.headers.cookie);      
     var _user = socket.handshake.auth.userName
     console.log("user connected: " + _user)
@@ -64,6 +64,12 @@ io.on("connection", (socket) => {
         //cookie: socket.handshake.headers.cookie
         })
     }
+    console.log('clients: '+io.engine.clientsCount)
+
+    socket.on('disconnect', () => {
+        socket.disconnect()
+        console.log(socket.handshake.auth.userName + ' disconnected')
+    })
     socket.on('refresh', () => {
         console.log(io.sockets.clients())
         console.log('success')
