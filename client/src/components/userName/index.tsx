@@ -7,6 +7,7 @@ export function UserName() {
     const [userNameSubmitted, setUserNameSubmitted] = useState(false)
 
     useEffect(() => {
+        // Check if browser cookie matches the database
         let cookie = document.cookie
         fetch(`http://localhost:3001/users/matchCookies?value=${cookie.substring(11)}`, {
             method: `GET`,
@@ -15,7 +16,7 @@ export function UserName() {
         .then(res => res.json())
         .then(data => {
             if (data.userName != undefined) {
-                console.log('test')
+                console.log('useEffect')
                 setUserName(data.userName)
                 setUserNameSubmitted(true)
                 socket.auth = data.userName
@@ -36,7 +37,7 @@ export function UserName() {
         })
     }
 
-    const updateUserName = (e: { target: { value: React.SetStateAction<string> } }) => {
+    const updateUserName = (e): void => {
         setUserName(e.target.value)
     }
 
