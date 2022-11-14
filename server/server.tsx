@@ -51,30 +51,27 @@ const io = new Server(server, {
     }
     })
 
-io.on("connection", async (socket) => {
-    // var cookies = cookie.parse(socket.handshake.headers.cookie);      
+io.on("connection", async (socket) => {   
     var _user = socket.handshake.auth.userName
     console.log("user connected: " + _user)
-    // socket.handshake.headers.cookie = cookieLib.serialize('name', socket.id)
     var users = []
     for (let [id, socket] of io.of("/").sockets) {
-        users.push({
-        userID: id,
-        username: socket.handshake.auth.userName,
-        //cookie: socket.handshake.headers.cookie
-        })
+        if (!(socket.handshake.auth.cookie in users)) {
+            users.push({
+            userID: id,
+            username: socket.handshake.auth.userName,
+            cookie: socket.handshake.auth.cookie,
+            token: socket.handshake.auth.token
+        })}
+        // sends to onlineStatus component:
     }
-    console.log('clients: '+io.engine.clientsCount)
+    socket.emit('cookies', users)
+    console.log('clients: '+io.engine.clientsCount) 
 
-    socket.on('disconnect', () => {
-        socket.connect
-        console.log(socket.handshake.auth.userName + ' reconnected')
-    })
     socket.on('refresh', () => {
         for (let [id, socket] of io.of("/").sockets) {
-            console.log(socket.handshake.auth.userName)
+            console.log(socket.handshake.auth.cookie)
             }
-        console.log('success')
     })
     })
 

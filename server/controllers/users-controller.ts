@@ -20,7 +20,7 @@ exports.matchCookies = async (req, res) => {
         let findUser = data.find(x => x.cookie === val)
         if (findUser != undefined) {
             console.log(findUser)
-            res.status(200).json({userName: findUser.userName, token: findUser.token})
+            res.status(200).json({userName: findUser.userName, token: findUser.token, cookie: findUser.cookie})
         }
         else {
             res.status(403).json({message: `Cookie not attached to an existing user.`})

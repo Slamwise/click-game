@@ -16,7 +16,7 @@ export function UserName() {
         .then(res => res.json())
         .then(data => {
             if (data.userName != undefined) {
-                console.log('useEffect')
+                console.log(data)
                 setUserName(data.userName)
                 setUserNameSubmitted(true)
                 socket.auth = data
