@@ -68,10 +68,12 @@ io.on("connection", async (socket) => {
 
     socket.on('disconnect', () => {
         socket.connect
-        console.log(socket.handshake.auth.userName + 'reconnected')
+        console.log(socket.handshake.auth.userName + ' reconnected')
     })
     socket.on('refresh', () => {
-        console.log(io.sockets.clients())
+        for (let [id, socket] of io.of("/").sockets) {
+            console.log(socket.handshake.auth.userName)
+            }
         console.log('success')
     })
     })

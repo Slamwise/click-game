@@ -19,10 +19,11 @@ export function UserName() {
                 console.log('useEffect')
                 setUserName(data.userName)
                 setUserNameSubmitted(true)
-                socket.auth = data.userName
+                socket.auth = data
                 socket.connect()
-                socket.emit('refresh')}
-                
+                socket.emit('refresh')
+                // socket.emit('refresh')
+            }
         })
     }, [])
 
