@@ -1,5 +1,3 @@
-import React from 'react';
-
 // Create interfaces
 interface leaderBoardItemUI {
     position: number;

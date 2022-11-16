@@ -3,6 +3,7 @@ import './App.css';
 import { UserName } from "./components/userName";
 import { Leaderboard } from "./components/leaderBoard";
 import { socket } from "./services/socketService"
+import { OnlineBoard } from './components/onlineBoard';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
     <div>
       <UserName></UserName>
       <Leaderboard></Leaderboard>
+      <OnlineBoard></OnlineBoard>
     </div>
         )
   }

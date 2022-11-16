@@ -56,7 +56,7 @@ io.on("connection", async (socket) => {
     console.log("user connected: " + _user)
     var users = []
     for (let [id, socket] of io.of("/").sockets) {
-        if (!(socket.handshake.auth.cookie in users)) {
+        if (!(users.map(u=>u.cookie).includes(socket.handshake.auth.cookie))) {
             users.push({
             userID: id,
             username: socket.handshake.auth.userName,

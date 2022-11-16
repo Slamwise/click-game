@@ -43,9 +43,37 @@ knex.schema
       console.error(`There was an error setting up the database: ${error}`)
     })
 
+// Create a table to list and delist online users"
+knex.schema
+  // Make sure the table exists
+  .hasTable('onlineUsers')
+    .then((exists) => {
+      if (!exists) {
+        return knex.schema.createTable('onlineUsers', (table)  => {
+          table.integer('token').primary()
+          table.string('userName')
+          table.string('cookie')
+        })
+        .then(() => {
+          // Log success message
+          console.log('Table \'onlineUsers\' created')
+        })
+        .catch((error) => {
+          console.error(`There was an error creating table: ${error}`)
+        })
+      }
+    })
+    .catch((error) => {
+      console.error(`There was an error setting up the database: ${error}`)
+    })
+
 // Just for debugging purposes:
 // Log all data in "users" table
-knex.select('*').from('users')
+// knex.select('*').from('users')
+//   .then(data => console.log('data:', data))
+//   .catch(err => console.log(err))
+
+knex.select('*').from('onlineUsers')
   .then(data => console.log('data:', data))
   .catch(err => console.log(err))
 
