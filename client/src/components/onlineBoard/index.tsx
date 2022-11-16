@@ -6,9 +6,8 @@ import { OnlineList } from '../onlineList'
 import '../../styles/onlineboard.css'
 
 interface onlineUserUI {
-    Username: string
-    Token: number
-    Cookie: string
+    userName: string
+    cookie: string
 }
 
 export const OnlineBoard = () => {
@@ -16,21 +15,17 @@ export const OnlineBoard = () => {
     const [online, setOnline] = useState<onlineUserUI[]>([])
     const [loading, setLoading] = useState(true)
 
-    // useEffect(() => {
-    //     console.log()
-    // })
-
-    socket.on('cookies', (users) => {
-        let onlineUsers: onlineUserUI[] = []
-        for (let [id, userName, cookie, token] of users) {
-            console.log(userName)
-            let user: onlineUserUI = {Username: userName, Token: token, Cookie: cookie}
-            onlineUsers.push(user)
-        }
-        setOnline(onlineUsers)
-        setLoading(false)
-        console.log(`onlineUsers: ${online}`)
-    })
+    useEffect(() => {
+        fetch(`http://localhost:3001/users/online`, {
+            method: `GET`
+            })
+        .then(res => res.json())
+        .then(data => {
+            data = data.filter(u => !u.cookie.includes(document.cookie))
+            setOnline(data)
+            setLoading(false)
+        })
+    }, [])
 
     return (
         <div className = "onlineboard-wrapper">

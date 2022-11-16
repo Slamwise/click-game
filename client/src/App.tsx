@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     fetch(`http://localhost:3001/setCookies`, {
-      method: `GET`,
+      method: `POST`,
       credentials: 'include'
       })
   }, [])

@@ -12,8 +12,8 @@ app.use(cookieParser())
 
 const server = http.createServer(app)
 
-// Middleware functions for cookie handling
-const createCookie = (req,res,next) => {
+// Generate cookies upon landing on the homepage
+app.post('/setCookies', (req, res) => {
   var cookie = req.cookies.session_id
   if (cookie === undefined) {
       //cookie not defined, set a new cookie
@@ -26,24 +26,6 @@ const createCookie = (req,res,next) => {
   else {
       res.status(403).json({msg: 'cookie already set'})
   }
-  next();
-}
-// const validateCookie = (req,res,next) => {
-//   const { cookies } = req
-//   //console.log(cookies)
-//   if ('session_id' in cookies) {
-//       //console.log(`Session id exists`)
-//       if (cookies.session_id === 'session_id') {
-//           next()}
-//       else {
-//           res.status(403).send({msg: 'not authenticated'})}
-//       }
-//   else {
-//       res.status(403).send({msg: 'not authenticated'})}
-// }
-
-// Generate cookies upon landing on the homepage
-app.get('/setCookies', createCookie, (req, res) => {
 })
 
 const io = new Server(server, {
@@ -57,9 +39,11 @@ const io = new Server(server, {
 io.on("connection", async (socket) => {   
     var _user = socket.handshake.auth.userName
     var cookie = socket.handshake.auth.cookie
-    var token = socket.handshake.auth.token
+
     console.log("user connected: " + _user)
-    await axios.post(`http://localhost:3001/users/connect?username=${_user}&token=${token}&cookie=${cookie}`)
+
+    axios.post(`http://localhost:3001/users/connect?username=${_user}&cookie=${cookie}`)
+    .then(() => {})
     .catch((err) => {console.log('error')})
 
     console.log('clients: '+io.engine.clientsCount) 
@@ -71,7 +55,7 @@ io.on("connection", async (socket) => {
     })
 
     socket.on('disconnect', () => {
-        axios.post(`http://localhost:3001/users/disconnect?username=${_user}&token=${token}`)
+        axios.post(`http://localhost:3001/users/disconnect?username=${_user}&cookie=${cookie}`)
     })
 })
 

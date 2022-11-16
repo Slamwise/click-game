@@ -22,7 +22,6 @@ export function UserName() {
                 socket.auth = data
                 socket.connect()
                 socket.emit('refresh')
-                // socket.emit('refresh')
             }
         })
     }, [])
@@ -35,10 +34,6 @@ export function UserName() {
         await fetch(`http://localhost:3001/users/new?username=${userName}`, {
             method: `POST`,
             credentials: `include`
-        })
-        .then(() => {
-            socket.connect()
-            console.log('connected')
         })
         .catch(() => {
             console.log('api request failure')

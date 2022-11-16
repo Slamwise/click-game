@@ -4,9 +4,8 @@ import "../../styles/onlinelist.css"
 import { OnlineUser } from "../onlineUser"
 
 interface onlineUserUI {
-    Username: string
-    Token: number
-    Cookie: string
+    userName: string
+    cookie: string
 }
 
 interface onlineListUI {
@@ -34,9 +33,8 @@ export const OnlineList = (props: onlineListUI) => {
             {props.users.length > 0 ? (
             props.users.map((onlineUser: onlineUserUI) => (
                   <OnlineUser
-                    Token={onlineUser.Token}
-                    Username={onlineUser.Username}
-                    Cookie={onlineUser.Cookie}
+                    userName={onlineUser.userName}
+                    cookie={onlineUser.cookie}
                   />
                   )
                 )

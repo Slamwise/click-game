@@ -18,11 +18,14 @@ router.get('/matchCookies', userRoutes.matchCookies)
 // '/users/new?username={}'
 router.post('/new', userRoutes.newUser)
 
-// '/users/connect?username={}&token={}&cookie={}'
+// '/users/connect?username={}&cookie={}'
 router.post('/connect', userRoutes.connect)
 
-// '/users/disconnect?username={}&token={}'
+// '/users/disconnect?username={}&cookie={}'
 router.post('/disconnect', userRoutes.disconnect)
+
+// '/users/online'
+router.get('/online', userRoutes.online)
 
 // Export router
 module.exports = router

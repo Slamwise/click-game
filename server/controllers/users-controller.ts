@@ -48,7 +48,6 @@ exports.newUser = async (req, res) => {
 // Add connecting user to connected users DB
 exports.connect = async (req, res) => {
     let userName = req.query.username
-    let token = req.query.token
     let cookie = req.query.cookie
 
     // Check if user already in database:
@@ -60,7 +59,6 @@ exports.connect = async (req, res) => {
         }
         else {
             knex('onlineUsers').insert({
-                token: token,
                 userName: userName,
                 cookie: cookie
             })
@@ -78,14 +76,26 @@ exports.connect = async (req, res) => {
 
 // Remove disconnecting user from connected users DB
 exports.disconnect = async (req, res) => {
-    let token = req.query.token
-    let userName = req.query.username
-    knex('onlineUsers').where('token', token).del()
+    let cookie = req.query.cookie
+    // let userName = req.query.username
+    knex('onlineUsers').where('cookie', cookie).del()
     .then(() => {
-        console.log((`${userName} removed from connected users database`))
+        // console.log((`${userName} removed from connected users database`))
         res.status(200).json({message: `succesfully removed a user from connected database`})
     })
     .catch((err) => {
         res.status(403).json({ message: `There was an error removing user from connected database: ${err}` })
+    })
+}
+
+// Check online users against connected users DB
+exports.online = async (req, res) => {
+    knex.select().from('onlineUsers')
+    .then((data) => {
+        res.json(data)
+        res.status(200)
+    })
+    .catch(() => {
+        res.status(403)
     })
 }

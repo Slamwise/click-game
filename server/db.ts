@@ -50,7 +50,6 @@ knex.schema
     .then((exists) => {
       if (!exists) {
         return knex.schema.createTable('onlineUsers', (table)  => {
-          table.integer('token').primary()
           table.string('userName')
           table.string('cookie')
         })
