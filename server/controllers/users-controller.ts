@@ -1,5 +1,4 @@
 const knex = require("./../db.ts")
-const cookieLib = require("cookie")
 
 // Get all users
 exports.getUsers = async (req, res) => {
@@ -19,7 +18,7 @@ exports.matchCookies = async (req, res) => {
     .then((data) => {
         let findUser = data.find(x => x.cookie === val)
         if (findUser != undefined) {
-            console.log(findUser)
+            //console.log(findUser)
             res.status(200).json({userName: findUser.userName, token: findUser.token, cookie: findUser.cookie})
         }
         else {
@@ -45,4 +44,48 @@ exports.newUser = async (req, res) => {
         res.status(403).json({ message: `There was an error adding user: ${err}` })
     })
 }
-// 
+
+// Add connecting user to connected users DB
+exports.connect = async (req, res) => {
+    let userName = req.query.username
+    let token = req.query.token
+    let cookie = req.query.cookie
+
+    // Check if user already in database:
+    knex.select('cookie').from('onlineUsers')
+    .then((data) => {
+        if (data.map(u=>u.cookie).includes(cookie)) {
+            //console.log('user already in connected database')
+            res.status(200).json({message: `${req.query.username} already in connected database`})
+        }
+        else {
+            knex('onlineUsers').insert({
+                token: token,
+                userName: userName,
+                cookie: cookie
+            })
+            .then(() => {
+                console.log(`succesfully added ${req.query.username} to connected database`)
+                res.status(200).json({message: `succesfully added ${req.query.username} to connected database`})
+            })
+            .catch((err) => {
+                // console.log(err)
+                res.status(403).json({ message: `There was an error adding user to connected database: ${err}` })
+            })
+        }
+    })
+}
+
+// Remove disconnecting user from connected users DB
+exports.disconnect = async (req, res) => {
+    let token = req.query.token
+    let userName = req.query.username
+    knex('onlineUsers').where('token', token).del()
+    .then(() => {
+        console.log((`${userName} removed from connected users database`))
+        res.status(200).json({message: `succesfully removed a user from connected database`})
+    })
+    .catch((err) => {
+        res.status(403).json({ message: `There was an error removing user from connected database: ${err}` })
+    })
+}

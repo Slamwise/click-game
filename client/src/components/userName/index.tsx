@@ -36,6 +36,13 @@ export function UserName() {
             method: `POST`,
             credentials: `include`
         })
+        .then(() => {
+            socket.connect()
+            console.log('connected')
+        })
+        .catch(() => {
+            console.log('api request failure')
+        })
     }
 
     const updateUserName = (e): void => {

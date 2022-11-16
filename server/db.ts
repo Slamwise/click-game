@@ -74,7 +74,7 @@ knex.schema
 //   .catch(err => console.log(err))
 
 knex.select('*').from('onlineUsers')
-  .then(data => console.log('data:', data))
+  .then(data => console.log('online users:', data))
   .catch(err => console.log(err))
 
 // Export the database

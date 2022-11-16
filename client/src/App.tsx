@@ -7,15 +7,11 @@ import { OnlineBoard } from './components/onlineBoard';
 
 function App() {
 
-  socket.onAny((event, ...args) => {
-    console.log(event, args);
-  });
-
   useEffect(() => {
     fetch(`http://localhost:3001/setCookies`, {
       method: `GET`,
       credentials: 'include'
-  })
+      })
   }, [])
 
   return (
