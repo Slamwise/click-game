@@ -27,5 +27,8 @@ router.post('/disconnect', userRoutes.disconnect)
 // '/users/online'
 router.get('/online', userRoutes.online)
 
+// '/users/sendRequest?username={}&cookie={}'
+
+
 // Export router
 module.exports = router
