@@ -1,8 +1,16 @@
+import React, { useState, useEffect } from "react"
 import "../../styles/onlineuser.css"
+import { socket } from "../../services/socketService"
 
 interface onlineUserUI {
     userName: string
     cookie: string
+    socketId: string
+}
+
+const sendRequest = (props) => {
+    socket.emit('request', {to: props, from: {socketId: socket.id, auth: socket.auth}})
+    console.log(socket)
 }
 
 export const OnlineUser = (props: onlineUserUI) => (
@@ -12,7 +20,7 @@ export const OnlineUser = (props: onlineUserUI) => (
             </td>
 
             <td className="table-item">
-            <button className="join-request-button">Send Join Request</button>
+            <button className="join-request-button" onClick={() => sendRequest(props)}>Send Join Request</button>
             </td>
         </tr>
 )

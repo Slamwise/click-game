@@ -52,6 +52,7 @@ knex.schema
         return knex.schema.createTable('onlineUsers', (table)  => {
           table.string('userName')
           table.string('cookie')
+          table.string('socketId')
         })
         .then(() => {
           // Log success message

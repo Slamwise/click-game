@@ -49,6 +49,7 @@ exports.newUser = async (req, res) => {
 exports.connect = async (req, res) => {
     let userName = req.query.username
     let cookie = req.query.cookie
+    let socketId = req.query.socketId
 
     // Check if user already in database:
     knex.select('cookie').from('onlineUsers')
@@ -60,10 +61,11 @@ exports.connect = async (req, res) => {
         else {
             knex('onlineUsers').insert({
                 userName: userName,
-                cookie: cookie
+                cookie: cookie,
+                socketId: socketId
             })
             .then(() => {
-                console.log(`succesfully added ${req.query.username} to connected database`)
+                //console.log(`succesfully added ${req.query.username} to connected database`)
                 res.status(200).json({message: `succesfully added ${req.query.username} to connected database`})
             })
             .catch((err) => {

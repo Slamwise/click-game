@@ -6,6 +6,7 @@ const cors = require("cors")
 const cookieLib = require("cookie")
 const cookieParser = require("cookie-parser")
 const axios = require("axios")
+const knex = require("./db.ts")
 
 app.use(cors())
 app.use(cookieParser())
@@ -42,16 +43,14 @@ io.on("connection", async (socket) => {
 
     console.log("user connected: " + _user)
 
-    axios.post(`http://localhost:3001/users/connect?username=${_user}&cookie=${cookie}`)
-    .then(() => {})
-    .catch((err) => {console.log('error')})
+    axios.post(`http://localhost:3001/users/connect?username=${_user}&cookie=${cookie}&socketId=${socket.id}`)
+    .catch((err) => {console.log(err)})
 
     console.log('clients: '+io.engine.clientsCount) 
-
-    socket.on('refresh', () => {
-        for (let [id, socket] of io.of("/").sockets) {
-            //console.log(socket.handshake.auth.cookie)
-            }
+    
+    socket.on('request', (data) => {
+        console.log(data)
+        io.to(data.to.socketId).emit('game_request', data.from)
     })
 
     socket.on('disconnect', () => {

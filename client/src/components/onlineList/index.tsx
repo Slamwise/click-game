@@ -6,6 +6,7 @@ import { OnlineUser } from "../onlineUser"
 interface onlineUserUI {
     userName: string
     cookie: string
+    socketId: string
 }
 
 interface onlineListUI {
@@ -35,6 +36,7 @@ export const OnlineList = (props: onlineListUI) => {
                   <OnlineUser
                     userName={onlineUser.userName}
                     cookie={onlineUser.cookie}
+                    socketId={onlineUser.socketId}
                   />
                   )
                 )

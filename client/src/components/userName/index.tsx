@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { socket } from "../../services/socketService"
 import "../../styles/username.css"
+import { OnlineBoard } from "../onlineBoard"
 
 export function UserName() {
     const [userName, setUserName] = useState("")
@@ -21,7 +22,7 @@ export function UserName() {
                 setUserNameSubmitted(true)
                 socket.auth = data
                 socket.connect()
-                socket.emit('refresh')
+                console.log(socket)
             }
         })
     }, [])
@@ -59,6 +60,7 @@ export function UserName() {
         return (
         <div className="username-display">
             <p>Username selected: {userName}</p>
+            <OnlineBoard></OnlineBoard>
         </div>
         )
     }
