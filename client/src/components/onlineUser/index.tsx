@@ -10,7 +10,6 @@ interface onlineUserUI {
 
 const sendRequest = (props) => {
     socket.emit('request', {to: props, from: {socketId: socket.id, auth: socket.auth}})
-    console.log(socket)
 }
 
 export const OnlineUser = (props: onlineUserUI) => (
