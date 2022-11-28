@@ -56,7 +56,12 @@ function App() {
     }
   else {
     return(
-      <div>Nothin</div>
+      <div>
+        <div>Nothin</div>
+        <div className='timer'>{timeRemaining}</div>
+        <div className='player-score'>You: {playerScore}</div>
+        <div className='opponent-score'>{opponent}: {opponentScore}</div>
+      </div>
     )
   }
 }
