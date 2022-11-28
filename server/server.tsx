@@ -3,7 +3,6 @@ const app = express()
 const http = require("http")
 const { Server } = require("socket.io")
 const cors = require("cors")
-const cookieLib = require("cookie")
 const cookieParser = require("cookie-parser")
 const axios = require("axios")
 const knex = require("./db.ts")
@@ -51,6 +50,24 @@ io.on("connection", async (socket) => {
     socket.on('request', (data) => {
         console.log(data)
         io.to(data.to.socketId).emit('game_request', data.from)
+    })
+
+    socket.on('updateOnline', () => {
+        var users = [];
+        for (let [id, socket] of io.of("/").sockets) {
+            users.push({
+            id: id,
+            userName: socket.handshake.auth.userName,
+            cookie: socket.handshake.auth.cookie
+            })}
+        knex.select().from('onlineUsers')
+        .then((data) => {
+              for (let u of data) {
+                  if (!(u.cookie in users.map(user=>user.cookie))) {
+                    axios.post(`http://localhost:3001/users/disconnect?username=${u.userName}&cookie=${u.cookie}`)
+                  }
+              }
+        })
     })
 
     socket.on('disconnect', () => {

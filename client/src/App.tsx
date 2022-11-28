@@ -23,6 +23,8 @@ function App() {
       method: `POST`,
       credentials: 'include'
       })
+
+    socket.emit('updateOnline')
   }, [])
 
   if (gameStarted === false) {

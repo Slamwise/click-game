@@ -1,4 +1,5 @@
 const knex = require("./../db.ts")
+const io = require("./../server.tsx")
 
 // Get all users
 exports.getUsers = async (req, res) => {
